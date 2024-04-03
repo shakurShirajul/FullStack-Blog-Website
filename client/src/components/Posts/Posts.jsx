@@ -5,13 +5,13 @@ const Posts = () => {
     const [posts, setPosts] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/posts/all')
+        fetch('http://localhost:9000/posts/all')
             .then(res => res.json())
             .then(data => setPosts(data));
     }, [])
 
     return (
-        <div>
+        <div className="flex-1 border-2 border-green-950">
             {
                 posts.map((post,index)=>
                     <Post key={index} post={post}/>    
