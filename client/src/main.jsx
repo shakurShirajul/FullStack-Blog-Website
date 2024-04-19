@@ -13,6 +13,8 @@ import Login from './components/Login/Login.jsx';
 import Profile from './components/Profile/Profile.jsx';
 import AuthProviders from './providers/AuthProviders.jsx';
 import PrivateRoute from './routes/PrivateRoute.jsx';
+import Register from './components/Register/Register.jsx';
+import TextBox from './components/TextBox/TextBox.jsx';
 
 const router = createBrowserRouter([
   {
@@ -22,16 +24,25 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Posts></Posts>,
+      },
+      {
+        path: '/profile',
+        element: <PrivateRoute><Profile></Profile></PrivateRoute>,
+        // </PrivateRoute>,
+      },
+      {
+        path: '/newstory',
+        element: <TextBox></TextBox>,
       }
     ]
   },
   {
     path: "/login",
-    element: <Login />,
+    element: <Login></Login>,
   },
   {
-    path: '/profile',
-    element: <PrivateRoute><Profile/></PrivateRoute>,
+    path: "/register",
+    element: <Register/>,
   }
 ]);
 

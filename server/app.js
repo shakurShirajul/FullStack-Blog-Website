@@ -27,16 +27,31 @@ app.get('/posts/all', async (req, res) => {
     // console.log(postsData);
     res.send(postData);
 })
+
+// Creating New Post
 app.post('/posts/new', async (req, res) => {
-    const { title, author, content, category } = req.body;
+    const { title, category, content, author, authorID  } = req.body;
+    console.log(req.body);
     const publishedDate = new Date();
-    await Post.create({
+    const newPost = await Post.create({
         title,
-        author,
-        content,
         category,
+        content,
+        author,
+        authorID,
         publishedDate,
     });
+
+    const updateUserPostArray = await User.updateOne(
+        { _id: authorID },
+        { $push: { postID: newPost._id } }
+    );
+
+    console.log(newPost);
+    console.log(".......................");
+    console.log(updateUserPostArray);
+
+
     res.status(201).json({
         success: true,
         message: "Successfully Added Book",
@@ -47,6 +62,32 @@ app.get('/posts', async (req, res) => {
     const { category } = req.query;
     const post = await Post.find({ category: category });
     res.send(post);
+})
+
+app.get('/posts/:id', async(req,res)=>{
+    const  userID=req.params.id;
+    // console.log(userID);
+    const postData = await Post.find({authorID: userID});
+    // console.log(postData);
+    res.send(postData);
+})
+
+app.post('/user/signup', async (req, res) => {
+    const { firstName, lastName, email, password } = req.body;
+    try{
+        const result = await User.insertMany({
+            firstName,
+            lastName,
+            email,
+            password
+        });
+        return res.status(200).json({ message: 'Login successful'})
+    }
+    catch (error) {
+        console.error('Error creating user:', error);
+        return res.status(500).json({ message: 'Internal server error' });
+    }
+    console.log(req.body);
 })
 
 app.post('/user/login', async (req, res) => {
@@ -69,7 +110,7 @@ app.post('/user/login', async (req, res) => {
         console.log(user._id, user._id.toString());
         return res
             // .cookie("token", user._id.toString(), { maxAge: 900000, httpOnly: true })
-            .status(200).json({ message: 'Login successful', data: user._id })
+            .status(200).json({ message: 'Login successful', data: user})
     } catch (error) {
         console.error('Error during login:', error);
         return res.status(500).json({ message: 'Internal server error' });

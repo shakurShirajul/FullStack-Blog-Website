@@ -3,15 +3,17 @@ import { Link, NavLink } from 'react-router-dom'
 import { AuthContext } from '../../providers/AuthProviders';
 const Navbar = () => {
 
-    const { userID, setUserID } = useContext(AuthContext)
+    const { userID, setUserID,isLogin, setIsLogin } = useContext(AuthContext)
 
     const handleLogOut = () => {
-        setUserID('');
-        console.log(userID);
+        // setUserID('');
+        setIsLogin(false);
+        console.log(isLogin);
+        // console.log(userID);
     }
 
     return (
-        <div className="container mx-auto mb-10 border-2">
+        <div className="container mx-auto mb-10 font-inter">
             <div className="navbar bg-base-100">
                 <div className="flex-1">
                     <a className="btn btn-ghost text-xl">TEXT</a>
@@ -24,7 +26,7 @@ const Navbar = () => {
                         </label>
                     </div>
                     <div className="dropdown dropdown-end">
-                        {userID ?
+                        {isLogin ?
                             <>
                                 <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                                     <div className="w-10 rounded-full">
@@ -43,9 +45,9 @@ const Navbar = () => {
                                 </ul>
                             </>
                             :
-                            <div>
-                                <button className="btn btn-outline btn-success"><Link to="/login">Log In</Link></button>
-                                <button className="btn btn-outline btn-warning"><Link to="">Sign Up</Link></button>
+                            <div className='space-x-4'>
+                                <Link to='/login'><button className="px-6 py-4 font-semibold border-none border-[#1A8917] border-2 rounded-2xl text-white bg-[#1A8917]">Log In</button></Link>
+                                <Link to="/register"><button className="px-6 py-4 font-semibold rounded-2xl border-2 border-[#1A8917] text-[#1A8917]">Sign UP</button></Link>
                             </div>
                         }
                     </div>

@@ -11,7 +11,7 @@ const Posts = () => {
     }, [])
 
     return (
-        <div className="flex-1 border-2 border-green-950">
+        <div className="flex-1 px-10">
             {
                 posts.map((post,index)=>
                     <Post key={index} post={post}/>    

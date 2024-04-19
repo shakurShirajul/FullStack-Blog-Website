@@ -6,7 +6,6 @@ import { Outlet } from "react-router-dom";
 const Root = () => {
     return (
         <div>
-            <h1>Shirajul Islam</h1>
             <Navbar></Navbar>
             <div className="container mx-auto flex">
                 <Sidebar></Sidebar>

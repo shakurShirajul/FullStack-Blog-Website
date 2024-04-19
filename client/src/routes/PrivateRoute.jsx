@@ -3,9 +3,9 @@ import { AuthContext } from "../providers/AuthProviders";
 import { Navigate } from "react-router-dom";
 
 const PrivateRoute = ({children}) => {
-    const {userID, setUserID} = useContext(AuthContext);
+    const {userID, setUserID, setIsLogin} = useContext(AuthContext);
 
-    if(userID){
+    if(setIsLogin){
         return children;
     }
     return <Navigate to="/login" replace={true}></Navigate>

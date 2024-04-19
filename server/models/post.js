@@ -27,6 +27,10 @@ const postSchema = new mongoose.Schema({
     },
     publishedDate :{
         type: Date,
+    },
+    authorID :{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'users'  
     }
 
 })

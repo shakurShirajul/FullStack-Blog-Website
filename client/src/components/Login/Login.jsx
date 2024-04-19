@@ -1,12 +1,14 @@
 import Cookies from 'js-cookie'
 import { useState, useEffect, useContext } from 'react';
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FiArrowRight } from "react-icons/fi";
 import AuthProviders, { AuthContext } from '../../providers/AuthProviders';
+// import { Link } from 'react-router-dom';
 
 const Login = () => {
     const navigate = useNavigate();
-    const { userID, setUserID } = useContext(AuthContext)
+
+    const { userID, setUserID, isLogin, setIsLogin } = useContext(AuthContext)
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -27,13 +29,16 @@ const Login = () => {
             }),
         })
         const responseData = await response.json();
-        console.log(responseData);
+        console.log(responseData.data);
 
         if (!response.ok) {
             console.log(response.statusText, response.status);
-        } else {
+        } 
+        else {
             setUserID(responseData.data);
-            console.log('UserData', userID);
+            setIsLogin(true);
+            // console.log('UserData', userID);
+            console.log("checking",isLogin);
             navigate("/");
         }
     };
@@ -56,7 +61,9 @@ const Login = () => {
                             <button>Login to Your Account </button>
                             <FiArrowRight />
                         </label>
+                        <p className='text-[#898889]'>Don’t have an account yet? <Link to="/register" className='text-white'>Register now!</Link></p>
                     </form>
+                   
                 </div>
             </div>
         </div>
