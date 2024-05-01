@@ -27,6 +27,10 @@ const userSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'posts'  
     }],
+    userBio:{
+        type: String,
+        
+    }
 })
 
 export const User = mongoose.model('users', userSchema);

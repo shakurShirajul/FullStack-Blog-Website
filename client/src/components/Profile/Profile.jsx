@@ -12,7 +12,7 @@ const Profile = () => {
             .then(data => setPosts(data));
     }, [])
     return (
-        <div className="flex w-[100%]">
+        <div className="flex w-[100%] font-space-grotesk">
             <div className="w-[80%]  h-screen px-10">
                 {
                     posts.map((post, index) =>
@@ -27,8 +27,8 @@ const Profile = () => {
                     </div>
                 </div>
                 <div className="flex flex-col justify-center items-start space-y-4">
-                    <h1 className="text-left">{userID.firstName+" "+userID.lastName}</h1>
-                    <h1 className="text-left">Hello World! Im an Italian guy interested in programming, money and AI! I'm interested in reporting what I learn; I hope to passionate you as well</h1>
+                    <h1 className="text-left text-xl font-medium ">{userID.firstName+" "+userID.lastName}</h1>
+                    <h1 className="text-left text-lg">{userID.userBio}</h1>
                     <button className="px-3 py-3 font-semibold border-none border-[#1A8917] border-2 rounded-full text-white bg-[#1A8917]">Follow</button>
                 </div>
             </div>

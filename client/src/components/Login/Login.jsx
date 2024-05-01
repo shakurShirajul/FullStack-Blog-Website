@@ -1,4 +1,4 @@
-import Cookies from 'js-cookie'
+// import Cookies from 'js-cookie'
 import { useState, useEffect, useContext } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import { FiArrowRight } from "react-icons/fi";
