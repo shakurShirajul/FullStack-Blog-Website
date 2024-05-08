@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProviders";
+import toast from "react-hot-toast";
 
 const TextBox = () => {
 	const { userID, setUserID } = useContext(AuthContext);
@@ -27,6 +28,11 @@ const TextBox = () => {
 				authorID: userID._id,
 			}),
 		});
+		// console.log(response);
+
+		if (response.statusText === "Created")
+			toast.success("Post created successfully");
+		else toast.error("Post creation failed");
 
 		// console.log(title, category, content);
 	};
@@ -48,7 +54,7 @@ const TextBox = () => {
 						type="text"
 						id="title"
 						name="title"
-						className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full border-2 h-14 shadow-sm sm:text-sm border-gray-300 rounded-md"
+						className="mt-1 p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full border-2 h-14 shadow-sm sm:text-sm border-gray-300 rounded-md"
 					/>
 				</div>
 
@@ -63,7 +69,7 @@ const TextBox = () => {
 						id="content"
 						name="content"
 						rows="5"
-						className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full border-2 shadow-sm sm:text-sm border-gray-300 rounded-md"
+						className="mt-1 p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full border-2 shadow-sm sm:text-sm border-gray-300 rounded-md"
 					></textarea>
 				</div>
 
